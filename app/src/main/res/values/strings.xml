@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ServiceDemo</string>
+    <string name="start_service">启动服务</string>
+    <string name="start_vc_service">启动VC服务</string>
+    <string name="close_service">关闭服务</string>
+    <string name="show_time">显示时间</string>
+    <string name="time_display">null</string>
+    <string name="get_car">获取Car对象</string>
+    <string name="get_car_manager">获取CarPropertyManager</string>
+</resources>
