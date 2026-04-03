@@ -29,4 +29,10 @@ public class UserRepository {
     public LiveData<List<User>> getAllUsers() {
         return userList;
     }
+
+    public void delete(final User user) {
+        new Thread(() -> {
+            userDao.deleteUser(user);
+        }).start();
+    }
 }

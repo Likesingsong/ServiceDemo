@@ -3,11 +3,13 @@ package com.martin.mvvm.ui.adpter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.martin.mvvm.OnItemDeleteListener;
 import com.martin.mvvm.R;
 import com.martin.mvvm.db.bean.User;
 
@@ -16,6 +18,7 @@ import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
     private List<User> users = new ArrayList<>();
+    private OnItemDeleteListener listener;
 
     @NonNull
     @Override
@@ -30,6 +33,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         User currentUser = users.get(position);
         holder.nameTv.setText(currentUser.getName());
         holder.passwordTv.setText(currentUser.getPassword());
+        holder.deleteBtn.setOnClickListener(v -> {
+            listener.delete(currentUser);
+        });
     }
 
     @Override
@@ -42,14 +48,22 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         notifyDataSetChanged();
     }
 
+    public void setItemDeleteListener(OnItemDeleteListener listener) {
+        this.listener = listener;
+    }
+
     static class UserViewHolder extends RecyclerView.ViewHolder {
         TextView nameTv;
         TextView passwordTv;
+        Button modifyBtn;
+        Button deleteBtn;
 
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
             nameTv = itemView.findViewById(R.id.tv_name);
             passwordTv = itemView.findViewById(R.id.tv_password);
+            modifyBtn = itemView.findViewById(R.id.btn_modify);
+            deleteBtn = itemView.findViewById(R.id.btn_delete);
         }
     }
 }
