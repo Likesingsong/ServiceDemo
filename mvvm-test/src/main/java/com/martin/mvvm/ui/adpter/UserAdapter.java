@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.martin.mvvm.OnItemDeleteListener;
+import com.martin.mvvm.OnItemModifyListener;
 import com.martin.mvvm.R;
 import com.martin.mvvm.db.bean.User;
 
@@ -18,7 +19,8 @@ import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
     private List<User> users = new ArrayList<>();
-    private OnItemDeleteListener listener;
+    private OnItemDeleteListener deleteListener;
+    private OnItemModifyListener modifyListener;
 
     @NonNull
     @Override
@@ -34,7 +36,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         holder.nameTv.setText(currentUser.getName());
         holder.passwordTv.setText(currentUser.getPassword());
         holder.deleteBtn.setOnClickListener(v -> {
-            listener.delete(currentUser);
+            deleteListener.delete(currentUser);
+        });
+        holder.modifyBtn.setOnClickListener(v -> {
+            modifyListener.modify(currentUser);
         });
     }
 
@@ -49,7 +54,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     }
 
     public void setItemDeleteListener(OnItemDeleteListener listener) {
-        this.listener = listener;
+        this.deleteListener = listener;
+    }
+
+    public void setModifyListener(OnItemModifyListener modifyListener) {
+        this.modifyListener = modifyListener;
     }
 
     static class UserViewHolder extends RecyclerView.ViewHolder {

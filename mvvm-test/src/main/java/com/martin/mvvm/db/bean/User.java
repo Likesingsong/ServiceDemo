@@ -2,6 +2,7 @@ package com.martin.mvvm.db.bean;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
+import androidx.databinding.library.baseAdapters.BR;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -27,6 +28,7 @@ public class User extends BaseObservable {
 
     public void setName(String name) {
         this.name = name;
+        notifyPropertyChanged(BR.name);
     }
 
     @Bindable
@@ -36,5 +38,6 @@ public class User extends BaseObservable {
 
     public void setPassword(String password) {
         this.password = password;
+        notifyPropertyChanged(BR.password);
     }
 }

@@ -6,4 +6,7 @@
     <string name="modify">修改</string>
     <string name="delete">删除</string>
     <string name="title">列表</string>
+    <string name="edit_user">编辑用户</string>
+    <string name="cancel">取消</string>
+    <string name="confirm">确认</string>
 </resources>

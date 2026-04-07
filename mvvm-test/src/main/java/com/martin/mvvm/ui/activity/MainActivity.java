@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.martin.mvvm.R;
 import com.martin.mvvm.db.bean.User;
 import com.martin.mvvm.ui.adpter.UserAdapter;
+import com.martin.mvvm.ui.dialog.EditUserDialog;
 import com.martin.mvvm.viewmodels.UserViewModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
         // 初始化 ViewModel
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         adapter.setItemDeleteListener(userViewModel::delete);
+        adapter.setModifyListener(user -> {
+            EditUserDialog dialog = new EditUserDialog(this, user, userViewModel::update);
+            dialog.show();
+        });
         // 观察 LiveData
         userViewModel.getUsers().observe(this, adapter::setUsers);
 
