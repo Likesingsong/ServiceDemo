@@ -3,6 +3,7 @@ package com.martin.mvvm.ui.dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,10 +45,13 @@ public class EditUserDialog extends Dialog {
             String name = usernameEdit.getText().toString().trim();
             String password = passwordEdit.getText().toString().trim();
             if (!name.isEmpty() && !password.isEmpty()) {
-                user.setName(name);
-                user.setPassword(password);
+                User updateUser = new User();
+                updateUser.setId(user.getId());
+                updateUser.setName(name);
+                updateUser.setPassword(password);
+                Log.d("EditUserDialog", "update user: " + updateUser);
                 if (listener != null) {
-                    listener.modify(user);
+                    listener.modify(updateUser);
                 }
                 dismiss();
             }

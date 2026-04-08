@@ -9,10 +9,14 @@ import com.martin.mvvm.db.bean.User;
 import com.martin.mvvm.db.dao.UserDao;
 
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class UserRepository {
-    private UserDao userDao;
-    private LiveData<List<User>> userList;
+    private final UserDao userDao;
+    private final LiveData<List<User>> userList;
+    private final Executor executor = Executors.newSingleThreadExecutor();
 
     public UserRepository(Application application) {
         AppDatabase db = AppDatabase.getInstance(application);
@@ -21,9 +25,7 @@ public class UserRepository {
     }
 
     public void insert(final User user) {
-        new Thread(() -> {
-            userDao.insertUser(user);
-        }).start();
+        executor.execute(() -> userDao.insertUser(user));
     }
 
     public LiveData<List<User>> getAllUsers() {
@@ -31,14 +33,17 @@ public class UserRepository {
     }
 
     public void delete(final User user) {
-        new Thread(() -> {
-            userDao.deleteUser(user);
-        }).start();
+        executor.execute(() -> userDao.deleteUser(user));
     }
 
     public void update(final User user) {
-        new Thread(() -> {
-            userDao.updateUser(user);
-        }).start();
+        executor.execute(() -> userDao.updateUser(user));
+    }
+
+    public void shutdown() {
+        if (executor instanceof ExecutorService) {
+            ExecutorService es = (ExecutorService) executor;
+            es.shutdown();
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.martin.mvvm.db.bean;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.databinding.library.baseAdapters.BR;
@@ -34,6 +35,16 @@ public class User extends BaseObservable {
     @Bindable
     public String getPassword() {
         return password;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 
     public void setPassword(String password) {
