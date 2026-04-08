@@ -35,4 +35,10 @@ public class UserRepository {
             userDao.deleteUser(user);
         }).start();
     }
+
+    public void update(final User user) {
+        new Thread(() -> {
+            userDao.updateUser(user);
+        }).start();
+    }
 }
