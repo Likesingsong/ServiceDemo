@@ -14,8 +14,11 @@ import java.util.List;
 public class UserViewModel extends BaseViewModel {
     private final UserRepository repository;
     private final LiveData<List<User>> users;
-    private final MutableLiveData<String> name = new MutableLiveData<>("");
-    private final MutableLiveData<String> password = new MutableLiveData<>("");
+    private final MutableLiveData<Boolean> showAddUserDialog = new MutableLiveData<>();
+
+    public LiveData<Boolean> getShowAddUserDialog() {
+        return showAddUserDialog;
+    }
 
     public UserViewModel(Application application) {
         super(application);
@@ -29,18 +32,17 @@ public class UserViewModel extends BaseViewModel {
 
     public void insert(User user) {
         repository.insert(user);
+        showAddUserDialog.setValue(false);
+    }
+
+    public void cancelInsert() {
+        if (Boolean.TRUE.equals(showAddUserDialog.getValue())) {
+            showAddUserDialog.setValue(false);
+        }
     }
 
     public void insertUser() {
-        if (name.getValue() != null && !name.getValue().isEmpty()
-                && password.getValue() != null && !password.getValue().isEmpty() ) {
-            User user = new User();
-            user.setName(name.getValue());
-            user.setPassword(password.getValue());
-            repository.insert(user);
-            name.postValue("");
-            password.postValue("");
-        }
+        showAddUserDialog.setValue(true);
     }
 
     public void delete(User user) {
@@ -49,14 +51,6 @@ public class UserViewModel extends BaseViewModel {
 
     public void update(User user) {
         repository.update(user);
-    }
-
-    public MutableLiveData<String> getName() {
-        return name;
-    }
-
-    public MutableLiveData<String> getPassword() {
-        return password;
     }
 
     @Override

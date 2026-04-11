@@ -10,6 +10,7 @@ import com.martin.mvvm.R;
 import com.martin.mvvm.base.BaseActivity;
 import com.martin.mvvm.databinding.ActivityMainBinding;
 import com.martin.mvvm.ui.adpter.UserAdapter;
+import com.martin.mvvm.ui.dialog.AddUserDialog;
 import com.martin.mvvm.ui.dialog.EditUserDialog;
 import com.martin.mvvm.viewmodels.UserViewModel;
 
@@ -29,6 +30,13 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, UserViewMode
         binding.userRv.setLayoutManager(new LinearLayoutManager(this));
         // 观察 LiveData
         mViewModel.getUsers().observe(this, adapter::setUsers);
+        mViewModel.getShowAddUserDialog().observe(this, show -> {
+            if (show != null && show) {
+                AddUserDialog dialog = new AddUserDialog(this, mViewModel::insert);
+                dialog.setOnDismissListener(d -> mViewModel.cancelInsert());
+                dialog.show();
+            }
+        });
     }
 
     @Override

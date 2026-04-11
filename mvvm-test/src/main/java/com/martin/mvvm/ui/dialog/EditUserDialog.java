@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 
-import com.martin.mvvm.OnItemModifyListener;
+import com.martin.mvvm.callback.OnUserActionListener;
 import com.martin.mvvm.R;
 import com.martin.mvvm.db.bean.User;
 
@@ -18,9 +18,9 @@ public class EditUserDialog extends Dialog {
     private EditText usernameEdit;
     private EditText passwordEdit;
     private final User user;
-    private final OnItemModifyListener listener;
+    private final OnUserActionListener listener;
 
-    public EditUserDialog(@NonNull Context context, User user, OnItemModifyListener listener) {
+    public EditUserDialog(@NonNull Context context, User user, OnUserActionListener listener) {
         super(context);
         this.user = user;
         this.listener = listener;
@@ -35,7 +35,7 @@ public class EditUserDialog extends Dialog {
         usernameEdit = findViewById(R.id.et_edit_username);
         passwordEdit = findViewById(R.id.et_edit_password);
         Button confirmButton = findViewById(R.id.btn_confirm);
-        Button cancelButton = findViewById(R.id.btn_cancel);
+        Button cancelButton = findViewById(R.id.btn_cancel_edit);
 
         // 填充当前数据
         usernameEdit.setText(user.getName());
@@ -51,7 +51,7 @@ public class EditUserDialog extends Dialog {
                 updateUser.setPassword(password);
                 Log.d("EditUserDialog", "update user: " + updateUser);
                 if (listener != null) {
-                    listener.modify(updateUser);
+                    listener.onAction(updateUser);
                 }
                 dismiss();
             }

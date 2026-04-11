@@ -3,26 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="24dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/edit_user"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
         android:gravity="center"
-        android:layout_marginBottom="16dp" />
+        android:text="@string/add_user"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/et_edit_username"
+        android:id="@+id/et_add_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/input_name"
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/et_edit_password"
+        android:id="@+id/et_add_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -37,19 +37,18 @@
         android:gravity="end">
 
         <Button
-            android:id="@+id/btn_cancel_edit"
+            android:id="@+id/btn_cancel_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cancel"
             style="?android:attr/buttonBarButtonStyle" />
 
         <Button
-            android:id="@+id/btn_confirm"
+            android:id="@+id/btn_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="@string/confirm"
+            android:text="@string/add"
             style="?android:attr/buttonBarButtonStyle" />
     </LinearLayout>
-
 </LinearLayout>
