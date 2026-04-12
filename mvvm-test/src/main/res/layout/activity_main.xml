@@ -22,9 +22,9 @@
             android:spacing="8dp">
 
             <include
-                android:id="@+id/btn_save"
+                android:id="@+id/btn_add_user"
                 layout="@layout/item_button"
-                binding:clickEvent="@{() -> viewModel.insertUser()}"
+                binding:clickEvent="@{() -> viewModel.openAddUserDialog()}"
                 binding:title="@{@string/add}" />
         </LinearLayout>
 
