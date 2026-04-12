@@ -1,5 +1,6 @@
 package com.martin.mvvm.ui.adpter;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         return users.size();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void setUsers(List<User> users) {
         this.users = users;
         notifyDataSetChanged();

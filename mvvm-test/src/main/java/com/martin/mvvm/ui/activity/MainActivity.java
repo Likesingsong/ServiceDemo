@@ -33,7 +33,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, UserViewMode
         mViewModel.getShowAddUserDialog().observe(this, show -> {
             if (show != null && show) {
                 AddUserDialog dialog = new AddUserDialog(this, mViewModel::insert);
-                dialog.setOnDismissListener(d -> mViewModel.cancelInsert());
+                dialog.setOnDismissListener(d -> mViewModel.closeAddUserDialog());
                 dialog.show();
             }
         });

@@ -32,17 +32,7 @@ public class UserViewModel extends BaseViewModel {
 
     public void insert(User user) {
         repository.insert(user);
-        showAddUserDialog.setValue(false);
-    }
-
-    public void cancelInsert() {
-        if (Boolean.TRUE.equals(showAddUserDialog.getValue())) {
-            showAddUserDialog.setValue(false);
-        }
-    }
-
-    public void insertUser() {
-        showAddUserDialog.setValue(true);
+        closeAddUserDialog();
     }
 
     public void delete(User user) {
@@ -51,6 +41,18 @@ public class UserViewModel extends BaseViewModel {
 
     public void update(User user) {
         repository.update(user);
+    }
+
+    public void closeAddUserDialog() {
+        if (Boolean.TRUE.equals(showAddUserDialog.getValue())) {
+            showAddUserDialog.setValue(false);
+        }
+    }
+
+    public void openAddUserDialog() {
+        if (Boolean.FALSE.equals(showAddUserDialog.getValue())) {
+            showAddUserDialog.setValue(true);
+        }
     }
 
     @Override

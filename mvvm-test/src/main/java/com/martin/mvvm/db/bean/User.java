@@ -1,5 +1,7 @@
 package com.martin.mvvm.db.bean;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
@@ -30,11 +32,18 @@ public class User extends BaseObservable {
     public void setName(String name) {
         this.name = name;
         notifyPropertyChanged(BR.name);
+        Log.d("User", "notifyPropertyChanged: " + name);
     }
 
     @Bindable
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+        notifyPropertyChanged(BR.password);
+        Log.d("User", "notifyPropertyChanged: " + password);
     }
 
     @NonNull
@@ -45,10 +54,5 @@ public class User extends BaseObservable {
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 '}';
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-        notifyPropertyChanged(BR.password);
     }
 }

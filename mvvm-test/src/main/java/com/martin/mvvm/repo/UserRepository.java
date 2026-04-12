@@ -24,12 +24,12 @@ public class UserRepository {
         userList = userDao.getAllUsers();
     }
 
-    public void insert(final User user) {
-        executor.execute(() -> userDao.insertUser(user));
-    }
-
     public LiveData<List<User>> getAllUsers() {
         return userList;
+    }
+
+    public void insert(final User user) {
+        executor.execute(() -> userDao.insertUser(user));
     }
 
     public void delete(final User user) {
